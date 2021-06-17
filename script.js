@@ -24,7 +24,6 @@ const ranks = [
 
 //Start game
 const startGame = () => {
-  randomCard = Math.round(Math.random() * 52);
   playerScore = 0;
   dealerScore = 0;
   dealHands();
