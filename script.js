@@ -2,6 +2,9 @@
 let playerScore = 0;
 let dealerScore = 0;
 let deck = [];
+let playersHand = [];
+let dealersHand = [];
+
 const suits = ["spades", "hearts", "diamonds", "clubs"];
 const ranks = [
   "ace",
@@ -20,6 +23,21 @@ const ranks = [
 ];
 
 //Start game
+const startGame = () => {
+  randomCard = Math.round(Math.random() * 52);
+  playerScore = 0;
+  dealerScore = 0;
+  dealHands();
+};
+
+const dealHands = () => {
+  for (let i = 0; i < 2; i++) {
+    const playerCard = deck[Math.round(Math.random() * 52)];
+    const dealerCard = deck[Math.round(Math.random() * 52)];
+    playersHand.push(playerCard);
+    dealersHand.push(dealerCard);
+  }
+};
 
 //Create deck
 const createDeck = () => {
