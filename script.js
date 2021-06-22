@@ -59,7 +59,10 @@ const startGame = () => {
   shuffleDeck(deck);
   dealHands();
 
-  $("#dealers-area img:nth-child(2)").css("background-color", "#fff");
+  $("#dealers-area :nth-child(3)").css("display", "none");
+  $("#dealers-area").append(
+    '<img class="card back"src="img/red_back.png"></img>'
+  );
   $(".score.player").css("visibility", "visible");
 
   if (playerScore === 21) {
@@ -126,9 +129,9 @@ const calculateScore = (card) => {
 //Dealers turn
 
 const dealersTurn = () => {
-  $("#dealers-cards li:nth-child(2)").css("background-color", "green");
+  $("#dealers-area :nth-child(3)").css("display", "inline");
   $(".score.dealer").css("visibility", "visible");
-
+  $(".back").remove();
   while (dealerScore < 17) {
     dealCard("dealer");
   }
