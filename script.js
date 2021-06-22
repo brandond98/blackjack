@@ -59,7 +59,7 @@ const startGame = () => {
   shuffleDeck(deck);
   dealHands();
 
-  $("#dealers-cards li:nth-child(2)").css("background-color", "#fff");
+  $("#dealers-area img:nth-child(2)").css("background-color", "#fff");
   $(".score.player").css("visibility", "visible");
 
   if (playerScore === 21) {
@@ -72,15 +72,16 @@ const startGame = () => {
 const dealCard = (player) => {
   const card = deck[0];
   const cardValue = card.split(" ")[0];
+  const cardImage = `<img class='card' src='img/${card}.png'></img>`;
 
   if (player === "player") {
     playersHand.push(card);
-    $("#players-cards").append(`<li>${card}</li>`);
+    $("#players-area").append(cardImage);
     playerScore += calculateScore(cardValue);
     $(".score.player").text(playerScore);
   } else if (player === "dealer") {
     dealersHand.push(card);
-    $("#dealers-cards").append(`<li>${card}</li>`);
+    $("#dealers-area").append(cardImage);
     dealerScore += calculateScore(cardValue);
     $(".score.dealer").text(dealerScore);
   }
@@ -116,7 +117,7 @@ const calculateScore = (card) => {
   } else if (card === "eight") {
     return 8;
   } else if (card === "nine") {
-    return 5;
+    return 9;
   } else {
     return 10;
   }
@@ -145,7 +146,6 @@ $("#hit-button").click(function () {
 
 $("#stand-button").click(function () {
   dealersTurn();
-  checkForWinner();
 });
 
 //Determine who won game

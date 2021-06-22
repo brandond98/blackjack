@@ -16,8 +16,8 @@ h1 {
   color: #fff;
 }
 
-.players-area,
-.dealers-area {
+#players-area,
+#dealers-area {
   margin-top: 100pt;
   display: flex;
   align-items: center;
@@ -46,4 +46,9 @@ h1 {
 
 ul {
   margin-right: 30pt;
+}
+
+.card {
+  width: 100px;
+  margin-left: 10px;
 }
