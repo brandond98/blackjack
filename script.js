@@ -5,25 +5,24 @@ let deck = [];
 let playersHand = [];
 let dealersHand = [];
 
-const suits = ["spades", "hearts", "diamonds", "clubs"];
-const ranks = [
-  "ace",
-  "two",
-  "three",
-  "four",
-  "five",
-  "six",
-  "seven",
-  "eight",
-  "nine",
-  "ten",
-  "jack",
-  "queen",
-  "king",
-];
-
 //Create deck
 const createDeck = () => {
+  const suits = ["spades", "hearts", "diamonds", "clubs"];
+  const ranks = [
+    "ace",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+    "jack",
+    "queen",
+    "king",
+  ];
   ranks.forEach((rank) => {
     suits.forEach((suit) => {
       deck.push(`${rank} of ${suit}`);
