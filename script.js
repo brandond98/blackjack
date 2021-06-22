@@ -53,6 +53,7 @@ const startGame = () => {
   playersHand = [];
   dealersHand = [];
 
+  $("ul").empty();
   createDeck();
   shuffleDeck(deck);
   dealHands();
@@ -61,21 +62,32 @@ const startGame = () => {
 //Deal cards to player and computer
 const dealHands = () => {
   for (let i = 0; i < 2; i++) {
+    //Get card and it's value and add to hand/score
     const playerCard = deck[0];
+    const playerCardValue = playerCard.split(" ")[0];
     playersHand.push(playerCard);
     $("#players-cards").append(`<li>${playerCard}</li>`);
+    playerScore += calculateScore(playerCardValue);
+    //Remove card from deck
     deck.shift();
 
     const dealerCard = deck[0];
+    const dealerCardValue = dealerCard.split(" ")[0];
     playersHand.push(dealerCard);
     $("#dealers-cards").append(`<li>${dealerCard}</li>`);
+    dealerScore += calculateScore(dealerCardValue);
     deck.shift();
   }
+  //Update on screen score
+  $(".score.player").text(playerScore);
+  $(".score.dealer").text(dealerScore);
+  checkForWinner();
 };
 
+//Calculate score
 const calculateScore = (card) => {
   if (card === "ace") {
-    return 1;
+    return 11;
   } else if (card === "one") {
     return 1;
   } else if (card === "two") {
@@ -102,5 +114,11 @@ const calculateScore = (card) => {
 //Hit/Stand funtionality - remove cards from deck/add up scores - ACE 11 or 1 functionality
 
 //Determine who won game
+
+const checkForWinner = () => {
+  if (playerScore === 21) {
+    console.log("Player Wins!");
+  }
+};
 
 //Replay
