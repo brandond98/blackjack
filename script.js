@@ -4,6 +4,7 @@ let dealerScore = 0;
 let deck = [];
 let playersHand = [];
 let dealersHand = [];
+let gameOver = false;
 
 //Create deck
 const createDeck = () => {
@@ -60,6 +61,10 @@ const startGame = () => {
 
   $("#dealers-cards li:nth-child(2)").css("background-color", "#fff");
   $(".score.player").css("visibility", "visible");
+
+  if (playerScore === 21) {
+    dealersTurn();
+  }
 };
 
 //Deal cards to player and computer
@@ -88,8 +93,6 @@ const dealHands = () => {
     dealCard("player");
     dealCard("dealer");
   }
-
-  checkForWinner();
 };
 
 //Calculate score
@@ -122,21 +125,25 @@ const calculateScore = (card) => {
 //Dealers turn
 
 const dealersTurn = () => {
+  $("#dealers-cards li:nth-child(2)").css("background-color", "green");
+  $(".score.dealer").css("visibility", "visible");
+
   while (dealerScore < 17) {
     dealCard("dealer");
   }
+  checkForWinner();
 };
 
 //Hit/Stand funtionality - remove cards from deck/add up scores - ACE 11 or 1 functionality
 
 $("#hit-button").click(function () {
   dealCard("player");
-  checkForWinner();
+  if (playerScore > 21) {
+    alert("Bust! Dealer wins.");
+  }
 });
 
 $("#stand-button").click(function () {
-  $("#dealers-cards li:nth-child(2)").css("background-color", "green");
-  $(".score.dealer").css("visibility", "visible");
   dealersTurn();
   checkForWinner();
 });
@@ -144,12 +151,21 @@ $("#stand-button").click(function () {
 //Determine who won game
 
 const checkForWinner = () => {
-  if (playerScore === 21) {
-    alert("Player WINS!");
-  } else if (dealerScore === 21) {
+  if (playerScore === dealerScore) {
+    alert("Draw!");
+  } else if (dealerScore > playerScore && dealerScore <= 21) {
     alert("Dealer wins!");
+  } else if (playerScore > dealerScore && playerScore <= 21) {
+    alert("Player wins!");
+  } else {
+    alert("Player wins!");
   }
+
+  gameOver = true;
 };
+
+if (gameOver) {
+}
 
 $("#start-game").click(function () {
   startGame();
