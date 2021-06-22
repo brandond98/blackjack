@@ -57,6 +57,9 @@ const startGame = () => {
   createDeck();
   shuffleDeck(deck);
   dealHands();
+
+  $("#dealers-cards li:nth-child(2)").css("background-color", "#fff");
+  $(".score.player").css("visibility", "visible");
 };
 
 //Deal cards to player and computer
@@ -85,7 +88,7 @@ const dealHands = () => {
     dealCard("player");
     dealCard("dealer");
   }
-  //Update on screen score
+
   checkForWinner();
 };
 
@@ -116,17 +119,35 @@ const calculateScore = (card) => {
   }
 };
 
+//Dealers turn
+
+const dealersTurn = () => {
+  while (dealerScore < 17) {
+    dealCard("dealer");
+  }
+};
+
 //Hit/Stand funtionality - remove cards from deck/add up scores - ACE 11 or 1 functionality
 
 $("#hit-button").click(function () {
   dealCard("player");
+  checkForWinner();
+});
+
+$("#stand-button").click(function () {
+  $("#dealers-cards li:nth-child(2)").css("background-color", "green");
+  $(".score.dealer").css("visibility", "visible");
+  dealersTurn();
+  checkForWinner();
 });
 
 //Determine who won game
 
 const checkForWinner = () => {
   if (playerScore === 21) {
-    console.log("Player Wins!");
+    alert("Player WINS!");
+  } else if (dealerScore === 21) {
+    alert("Dealer wins!");
   }
 };
 
@@ -136,7 +157,5 @@ $("#start-game").click(function () {
   $("#hit-button").css("visibility", "visible");
   $("#stand-button").css("visibility", "visible");
 });
-
-//Remove card from deck
 
 //Replay
