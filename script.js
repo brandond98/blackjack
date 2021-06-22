@@ -45,6 +45,7 @@ const shuffleDeck = (deck) => {
 };
 
 //Start game
+
 const startGame = () => {
   playerScore = 0;
   dealerScore = 0;
@@ -121,3 +122,10 @@ const checkForWinner = () => {
 };
 
 //Replay
+
+$("#start-game").click(function () {
+  startGame();
+  $("#start-game").css("visibility", "hidden");
+  $("#hit-button").css("visibility", "visible");
+  $("#stand-button").css("visibility", "visible");
+});

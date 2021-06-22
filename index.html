@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+
     <title>BlackJack</title>
   </head>
   <body>
@@ -15,12 +14,16 @@
       <span class="score dealer">0</span>
     </div>
     <div>
-      <button>Hit</button>
-      <button>Stand</button>
+      <button id="start-game">Start Game</button>
+      <button id="hit-button">Hit</button>
+      <button id="stand-button">Stand</button>
     </div>
     <div class="players-area">
       <ul id="players-cards"></ul>
       <span class="score player">0</span>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

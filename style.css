@@ -34,6 +34,11 @@ h1 {
   justify-content: center;
 }
 
+#stand-button,
+#hit-button {
+  visibility: hidden;
+}
+
 ul {
   width: 100%;
 }
