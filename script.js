@@ -69,10 +69,12 @@ const dealCard = (player) => {
     playersHand.push(card);
     $("#players-cards").append(`<li>${card}</li>`);
     playerScore += calculateScore(cardValue);
+    $(".score.player").text(playerScore);
   } else if (player === "dealer") {
     dealersHand.push(card);
     $("#dealers-cards").append(`<li>${card}</li>`);
     dealerScore += calculateScore(cardValue);
+    $(".score.dealer").text(dealerScore);
   }
   deck.shift();
 };
@@ -84,8 +86,6 @@ const dealHands = () => {
     dealCard("dealer");
   }
   //Update on screen score
-  $(".score.player").text(playerScore);
-  $(".score.dealer").text(dealerScore);
   checkForWinner();
 };
 
@@ -118,6 +118,10 @@ const calculateScore = (card) => {
 
 //Hit/Stand funtionality - remove cards from deck/add up scores - ACE 11 or 1 functionality
 
+$("#hit-button").click(function () {
+  dealCard("player");
+});
+
 //Determine who won game
 
 const checkForWinner = () => {
@@ -126,8 +130,6 @@ const checkForWinner = () => {
   }
 };
 
-//Replay
-
 $("#start-game").click(function () {
   startGame();
   $("#start-game").css("visibility", "hidden");
@@ -135,9 +137,6 @@ $("#start-game").click(function () {
   $("#stand-button").css("visibility", "visible");
 });
 
-$("#hit-button").click(function () {
-  playersHand.push(playerCard);
-  deck.shift();
-});
-
 //Remove card from deck
+
+//Replay
