@@ -9,8 +9,8 @@ h1 {
   color: #fff;
 }
 
-.dealers-cards,
-.players-cards {
+#dealers-cards,
+#players-cards {
   text-align: center;
   list-style: none;
   color: #fff;
