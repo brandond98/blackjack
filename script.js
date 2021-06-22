@@ -60,23 +60,28 @@ const startGame = () => {
 };
 
 //Deal cards to player and computer
+
+const dealCard = (player) => {
+  const card = deck[0];
+  const cardValue = card.split(" ")[0];
+
+  if (player === "player") {
+    playersHand.push(card);
+    $("#players-cards").append(`<li>${card}</li>`);
+    playerScore += calculateScore(cardValue);
+  } else if (player === "dealer") {
+    dealersHand.push(card);
+    $("#dealers-cards").append(`<li>${card}</li>`);
+    dealerScore += calculateScore(cardValue);
+  }
+  deck.shift();
+};
+
 const dealHands = () => {
   for (let i = 0; i < 2; i++) {
     //Get card and it's value and add to hand/score
-    const playerCard = deck[0];
-    const playerCardValue = playerCard.split(" ")[0];
-    playersHand.push(playerCard);
-    $("#players-cards").append(`<li>${playerCard}</li>`);
-    playerScore += calculateScore(playerCardValue);
-    //Remove card from deck
-    deck.shift();
-
-    const dealerCard = deck[0];
-    const dealerCardValue = dealerCard.split(" ")[0];
-    playersHand.push(dealerCard);
-    $("#dealers-cards").append(`<li>${dealerCard}</li>`);
-    dealerScore += calculateScore(dealerCardValue);
-    deck.shift();
+    dealCard("player");
+    dealCard("dealer");
   }
   //Update on screen score
   $(".score.player").text(playerScore);
@@ -129,3 +134,10 @@ $("#start-game").click(function () {
   $("#hit-button").css("visibility", "visible");
   $("#stand-button").css("visibility", "visible");
 });
+
+$("#hit-button").click(function () {
+  playersHand.push(playerCard);
+  deck.shift();
+});
+
+//Remove card from deck
