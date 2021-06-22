@@ -15,3 +15,25 @@ h1 {
   list-style: none;
   color: #fff;
 }
+
+.players-area,
+.dealers-area {
+  margin-top: 100pt;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score {
+  border-radius: 50%;
+  background: #eee;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ul {
+  width: 100%;
+}
