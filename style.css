@@ -1,47 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
 body {
-  background-color: green;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(img/background.webp);
+  background-size: cover;
+  font-family: "Open Sans", sans-serif;
 }
 
 h1 {
   text-align: center;
-  font-size: 40pt;
+  font-size: 25pt;
   color: #fff;
+  margin-bottom: 0;
+  font-weight: bold;
 }
 
-#dealers-cards,
-#players-cards {
-  text-align: center;
-  list-style: none;
+button {
+  background-color: #009900;
+  padding: 1.5em 3em;
+  border: none;
+  border-radius: 5px;
   color: #fff;
+  font-size: 12pt;
+  font-weight: bold;
 }
 
 #players-area,
 #dealers-area {
-  margin-top: 100pt;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 5rem 0;
 }
 
-.score {
+#players-area div,
+#dealers-area div {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.players-score,
+.dealers-score {
   border-radius: 50%;
-  background: #eee;
+  background: #000000a3;
+  color: #fff;
   width: 75px;
   height: 75px;
-  display: flex;
   align-items: center;
   justify-content: center;
-  visibility: hidden;
+  margin-left: 5em;
+  display: flex;
+  font-weight: bold;
+  font-size: 16pt;
 }
 
-#stand-button,
-#hit-button,
+#buttons div {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.stand-container,
+.hit-container {
+  display: none !important;
+}
+
 #play-again {
   display: none;
 }
 
+#stand-button,
+#hit-button {
+  margin: 0 1em;
+}
+
 #buttons {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 ul {
@@ -49,6 +84,20 @@ ul {
 }
 
 .card {
-  width: 100px;
+  width: 120px;
   margin-left: 10px;
+}
+
+#game-area {
+  padding: 1.5em 0;
+}
+
+h4 {
+  color: #fff;
+  font-size: 17pt;
+  margin-left: 1em;
+}
+
+.score-container {
+  visibility: hidden;
 }

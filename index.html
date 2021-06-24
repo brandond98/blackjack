@@ -9,23 +9,38 @@
     <title>BlackJack</title>
   </head>
   <body>
-    <div id="dealers-area">
-      <span class="score dealer">0</span>
-      <div class="cards"></div>
-    </div>
-    <div class="play-section">
-      <div id="buttons">
-        <button id="start-game">Start Game</button>
-        <button id="hit-button">Hit</button>
-        <button id="stand-button">Stand</button>
-        <button id="play-again">Play again</button>
+    <div class="container">
+      <div id="dealers-area">
+        <div>
+          <div class="cards"></div>
+          <div class="score-container dealer">
+            <span class="dealers-score">0</span>
+            <h4>Dealer</h4>
+          </div>
+        </div>
+      </div>
+      <div id="game-area">
+        <div id="buttons">
+          <button id="start-game">Start Game</button>
+          <div class="hit-container">
+            <button id="hit-button">Hit</button>
+          </div>
+          <div class="stand-container">
+            <button id="stand-button">Stand</button>
+          </div>
+          <button id="play-again">Play again!</button>
+        </div>
+      </div>
+      <div id="players-area">
+        <div>
+          <div class="cards"></div>
+          <div class="score-container player">
+            <span class="players-score">0</span>
+            <h4>Player</h4>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="players-area">
-      <span class="score player">0</span>
-      <div class="cards"></div>
-    </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="script.js"></script>
   </body>
