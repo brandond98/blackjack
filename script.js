@@ -4,7 +4,6 @@ let dealerScore = 0;
 let deck = [];
 let playersHand = [];
 let dealersHand = [];
-let gameOver = false;
 const dealCardSound = new Audio("536784__egomassive__deal.ogg");
 
 //Create deck
@@ -49,6 +48,13 @@ const shuffleDeck = (deck) => {
 //Start game
 
 const startGame = () => {
+  $("#start-game").css("display", "none");
+  $("#hit-button").css("display", "inline");
+  $("#stand-button").css("display", "inline");
+  $("#play-again").css("display", "none");
+  $(".cards").empty();
+  $("h1").remove();
+
   playerScore = 0;
   dealerScore = 0;
   deck = [];
@@ -60,14 +66,14 @@ const startGame = () => {
   shuffleDeck(deck);
   dealHands();
 
-  $("#dealers-area :nth-child(3)").css("display", "none");
-  $("#dealers-area").append(
+  $("#dealers-area .cards :nth-child(2)").css("display", "none");
+  $("#dealers-area .cards").append(
     '<img class="card back"src="img/red_back.png"></img>'
   );
   $(".score.player").css("visibility", "visible");
 
   if (playerScore === 21) {
-    dealersTurn();
+    checkForWinner();
   }
 };
 
@@ -80,12 +86,12 @@ const dealCard = (player) => {
 
   if (player === "player") {
     playersHand.push(card);
-    $("#players-area").append(cardImage);
+    $("#players-area .cards").append(cardImage);
     playerScore += calculateScore(cardValue);
     $(".score.player").text(playerScore);
   } else if (player === "dealer") {
     dealersHand.push(card);
-    $("#dealers-area").append(cardImage);
+    $("#dealers-area .cards").append(cardImage);
     dealerScore += calculateScore(cardValue);
     $(".score.dealer").text(dealerScore);
   }
@@ -132,9 +138,6 @@ const calculateScore = (card) => {
 //Dealers turn
 
 const dealersTurn = () => {
-  $("#dealers-area :nth-child(3)").css("display", "inline");
-  $(".score.dealer").css("visibility", "visible");
-  $(".back").remove();
   while (dealerScore < 17) {
     dealCard("dealer");
   }
@@ -142,17 +145,6 @@ const dealersTurn = () => {
 };
 
 //Hit/Stand funtionality - remove cards from deck/add up scores - ACE 11 or 1 functionality
-
-$("#hit-button").click(function () {
-  dealCard("player");
-  if (playerScore > 21) {
-    $(".play-section").append("<h1>Bust! Dealer wins.</h1>");
-  }
-});
-
-$("#stand-button").click(function () {
-  dealersTurn();
-});
 
 //Determine who won game
 
@@ -165,16 +157,38 @@ const checkForWinner = () => {
     $(".play-section").append("<h1>Player wins!</h1>");
   }
 
-  // End game
+  gameOver();
+};
+
+//Replay
+
+const gameOver = () => {
+  $(".back").remove();
+  $("#dealers-area .cards :nth-child(2)").css("display", "inline");
+  $(".score.dealer").css("visibility", "visible");
   $("#hit-button").css("display", "none");
   $("#stand-button").css("display", "none");
+  $("#play-again").css("display", "inline");
 };
+
+//Button functionality
+
+$("#hit-button").click(function () {
+  dealCard("player");
+  if (playerScore > 21) {
+    $(".play-section").append("<h1>Bust! Dealer wins.</h1>");
+    gameOver();
+  }
+});
+
+$("#stand-button").click(function () {
+  dealersTurn();
+});
 
 $("#start-game").click(function () {
   startGame();
-  $("#start-game").css("visibility", "hidden");
-  $("#hit-button").css("visibility", "visible");
-  $("#stand-button").css("visibility", "visible");
 });
 
-//Replay
+$("#play-again").click(function () {
+  startGame();
+});

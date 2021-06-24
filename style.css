@@ -35,8 +35,9 @@ h1 {
 }
 
 #stand-button,
-#hit-button {
-  visibility: hidden;
+#hit-button,
+#play-again {
+  display: none;
 }
 
 #buttons {
