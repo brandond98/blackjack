@@ -5,6 +5,7 @@ let deck = [];
 let playersHand = [];
 let dealersHand = [];
 let gameOver = false;
+const dealCardSound = new Audio("536784__egomassive__deal.ogg");
 
 //Create deck
 const createDeck = () => {
@@ -88,6 +89,8 @@ const dealCard = (player) => {
     dealerScore += calculateScore(cardValue);
     $(".score.dealer").text(dealerScore);
   }
+
+  dealCardSound.play();
   deck.shift();
 };
 
@@ -143,7 +146,7 @@ const dealersTurn = () => {
 $("#hit-button").click(function () {
   dealCard("player");
   if (playerScore > 21) {
-    alert("Bust! Dealer wins.");
+    $(".play-section").append("<h1>Bust! Dealer wins.</h1>");
   }
 });
 
@@ -155,20 +158,17 @@ $("#stand-button").click(function () {
 
 const checkForWinner = () => {
   if (playerScore === dealerScore) {
-    alert("Draw!");
+    $(".play-section").append("<h1>It's a draw!</h1>");
   } else if (dealerScore > playerScore && dealerScore <= 21) {
-    alert("Dealer wins!");
-  } else if (playerScore > dealerScore && playerScore <= 21) {
-    alert("Player wins!");
+    $(".play-section").append("<h1>Dealer wins!</h1>");
   } else {
-    alert("Player wins!");
+    $(".play-section").append("<h1>Player wins!</h1>");
   }
 
-  gameOver = true;
+  // End game
+  $("#hit-button").css("display", "none");
+  $("#stand-button").css("display", "none");
 };
-
-if (gameOver) {
-}
 
 $("#start-game").click(function () {
   startGame();
