@@ -11,13 +11,13 @@ h1 {
   text-align: center;
   font-size: 25pt;
   color: #fff;
-  margin-bottom: 0;
+  margin: 0.5em 0 0;
   font-weight: bold;
 }
 
 button {
   background-color: #009900;
-  padding: 1.5em 3em;
+  padding: 1.5em 2em;
   border: none;
   border-radius: 5px;
   color: #fff;
@@ -25,9 +25,12 @@ button {
   font-weight: bold;
 }
 
-#players-area,
 #dealers-area {
-  padding: 5rem 0;
+  padding: 3em 0 1.5em 0;
+}
+
+#players-area {
+  padding: 1.5em 0 3em 0;
 }
 
 #players-area div,
