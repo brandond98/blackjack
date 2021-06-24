@@ -156,7 +156,7 @@ const checkForWinner = () => {
   } else if (dealerScore > playerScore && dealerScore <= 21) {
     $("#game-area").append("<h1>The Dealer wins!</h1>");
   } else {
-    $("#game-area").append("<h1>You win!🥳</h1>");
+    $("#game-area").append("<h1>You win! 🥳</h1>");
   }
 
   gameOver();
