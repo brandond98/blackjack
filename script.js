@@ -152,7 +152,7 @@ const dealersTurn = () => {
 
 const checkForWinner = () => {
   if (playerScore === dealerScore) {
-    $("#game-area").append("<h1>It's a draw!</h1>");
+    $("#game-area").append("<1.51>It's a draw!</h1>");
   } else if (dealerScore > playerScore && dealerScore <= 21) {
     $("#game-area").append("<h1>The Dealer wins!</h1>");
   } else {
