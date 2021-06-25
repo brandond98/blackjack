@@ -46,14 +46,14 @@ button {
   border-radius: 50%;
   background: #000000a3;
   color: #fff;
-  width: 75px;
-  height: 75px;
+  width: 90px;
+  height: 90px;
   align-items: center;
   justify-content: center;
   margin-left: 5em;
   display: flex;
   font-weight: bold;
-  font-size: 16pt;
+  font-size: 15pt;
 }
 
 #buttons div {

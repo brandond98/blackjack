@@ -204,7 +204,11 @@ const checkForWinner = () => {
   const eligiblePlayerScore = eligiblePlayerScoreArr[0];
   const eligibleDealerScore = eligibleDealerScoreArr[0];
 
-  $(".dealers-score").text(eligibleDealerScore);
+  if (!eligibleDealerScore) {
+    $(".dealers-score").text(dealerScore[0]);
+  } else {
+    $(".dealers-score").text(eligibleDealerScore);
+  }
 
   if (eligiblePlayerScore === eligibleDealerScore) {
     $("#game-area").append("<h1>It's a draw!</h1>");
