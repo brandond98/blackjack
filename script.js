@@ -210,6 +210,12 @@ const checkForWinner = () => {
     $(".dealers-score").text(eligibleDealerScore);
   }
 
+  if (!eligiblePlayerScore) {
+    $(".dealers-score").text(playerScore[0]);
+  } else {
+    $(".players-score").text(eligiblePlayerScore);
+  }
+
   if (eligiblePlayerScore === eligibleDealerScore) {
     $("#game-area").append("<h1>It's a draw!</h1>");
   } else if (
