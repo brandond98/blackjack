@@ -185,9 +185,33 @@ const dealersTurn = () => {
 //Determine who won game
 
 const checkForWinner = () => {
-  if (playerScore === dealerScore) {
+  const eligibleDealerScoreArr = dealerScore
+    .filter((score) => {
+      return score <= 21;
+    })
+    .sort((a, b) => {
+      return b - a;
+    });
+
+  const eligiblePlayerScoreArr = playerScore
+    .filter((score) => {
+      return score <= 21;
+    })
+    .sort((a, b) => {
+      return b - a;
+    });
+
+  const eligiblePlayerScore = eligiblePlayerScoreArr[0];
+  const eligibleDealerScore = eligibleDealerScoreArr[0];
+
+  $(".dealers-score").text(eligibleDealerScore);
+
+  if (eligiblePlayerScore === eligibleDealerScore) {
     $("#game-area").append("<h1>It's a draw!</h1>");
-  } else if (dealerScore > playerScore && dealerScore <= 21) {
+  } else if (
+    eligibleDealerScore > eligiblePlayerScore &&
+    eligibleDealerScore <= 21
+  ) {
     $("#game-area").append("<h1>The Dealer wins!</h1>");
   } else {
     $("#game-area").append("<h1>You win! 🥳</h1>");
@@ -212,7 +236,7 @@ const gameOver = () => {
 
 $("#hit-button").click(function () {
   dealCard("player");
-  if (playerScore > 21) {
+  if (playerScore[0] > 21 && playerScore[1] > 21) {
     $("#game-area").append("<h1>Bust! The Dealer wins.</h1>");
     gameOver();
   }
