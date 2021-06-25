@@ -1,9 +1,9 @@
 // Initialise player score, dealer score, deck, hands
-let playerScore = 0;
-let dealerScore = 0;
-let deck = [];
-let playersHand = [];
-let dealersHand = [];
+let playerScore;
+let dealerScore;
+let deck;
+let playersHand;
+let dealersHand;
 
 const dealCardSound = new Audio("sounds/536784__egomassive__deal.ogg");
 
@@ -57,13 +57,12 @@ const startGame = () => {
   $(".cards").empty();
   $("h1").remove();
 
-  playerScore = 0;
-  dealerScore = 0;
+  playerScore = [0, 0];
+  dealerScore = [0, 0];
   deck = [];
   playersHand = [];
   dealersHand = [];
 
-  $("ul").empty();
   createDeck();
   shuffleDeck(deck);
   dealHands();
@@ -85,19 +84,34 @@ const dealCard = (player) => {
   const card = deck[0];
   const cardValue = card.split(" ")[0];
   const cardImage = `<img class='card' src='img/${card}.png'></img>`;
+  const playerScoreElement = ".players-score";
+  const dealerScoreElement = ".dealers-score";
 
   if (player === "player") {
     playersHand.push(card);
     $("#players-area .cards").append(cardImage);
-    playerScore += calculateScore(cardValue);
-    $(".players-score").text(playerScore);
+    playerScore[0] += calculateScore(cardValue, "player");
+    playerScore[1] += calculateScore(cardValue, "player");
+    if (playerScore[0] === playerScore[1]) {
+      $(playerScoreElement).text(playerScore[0]);
+    } else if (playerScore[0] === 21 || playerScore[1] === 21) {
+      $(playerScoreElement).text(21);
+    } else {
+      $(playerScoreElement).text(`${playerScore[0]} or ${playerScore[1]}`);
+    }
   } else if (player === "dealer") {
     dealersHand.push(card);
     $("#dealers-area .cards").append(cardImage);
-    dealerScore += calculateScore(cardValue);
-    $(".dealers-score").text(dealerScore);
+    dealerScore[0] += calculateScore(cardValue, "dealer");
+    dealerScore[1] += calculateScore(cardValue, "dealer");
+    if (dealerScore[0] === dealerScore[1]) {
+      $(dealerScoreElement).text(dealerScore[0]);
+    } else if (dealerScore[0] === 21 || dealerScore[1] === 21) {
+      $(dealerScoreElement).text(21);
+    } else {
+      $(dealerScoreElement).text(`${dealerScore[0]} or ${dealerScore[1]}`);
+    }
   }
-
   dealCardSound.play();
   deck.shift();
 };
@@ -111,9 +125,17 @@ const dealHands = () => {
 };
 
 //Calculate score
-const calculateScore = (card) => {
+const calculateScore = (card, player) => {
   if (card === "ace") {
-    return 11;
+    if (player === "player") {
+      playerScore[0] += 1;
+      playerScore[1] += 11;
+    } else if (player === "dealer") {
+      dealerScore[0] += 1;
+      dealerScore[1] += 11;
+      console.log("ace");
+    }
+    return 0;
   } else if (card === "one") {
     return 1;
   } else if (card === "two") {
@@ -140,8 +162,20 @@ const calculateScore = (card) => {
 //Dealers turn
 
 const dealersTurn = () => {
-  while (dealerScore < 17) {
+  let stop = false;
+
+  if (dealerScore[0] >= 17 || dealerScore[1] >= 17) {
+    checkForWinner();
+    return;
+  }
+
+  while (dealerScore[0] < 17 || dealerScore[1] < 17) {
     dealCard("dealer");
+    if (dealerScore[0] >= 17 && dealerScore[0] <= 21) {
+      break;
+    } else if (dealerScore[1] >= 17 && dealerScore[1] <= 21) {
+      break;
+    }
   }
   checkForWinner();
 };
@@ -152,7 +186,7 @@ const dealersTurn = () => {
 
 const checkForWinner = () => {
   if (playerScore === dealerScore) {
-    $("#game-area").append("<1.51>It's a draw!</h1>");
+    $("#game-area").append("<h1>It's a draw!</h1>");
   } else if (dealerScore > playerScore && dealerScore <= 21) {
     $("#game-area").append("<h1>The Dealer wins!</h1>");
   } else {
@@ -168,6 +202,7 @@ const gameOver = () => {
   $(".back").remove();
   $("#dealers-area .cards :nth-child(2)").css("display", "inline");
   $(".score-container.dealer").css("visibility", "visible");
+
   $(".hit-container").css("display", "none");
   $(".stand-container").css("display", "none");
   $("#play-again").css("display", "inline");
