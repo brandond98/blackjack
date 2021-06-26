@@ -224,7 +224,10 @@ const checkForWinner = () => {
   }
 
   //Add text to let the user know who won the game and end game
-  if (eligiblePlayerScore === eligibleDealerScore) {
+  if (playerScore[0] > 21 && playerScore[1] > 21) {
+    $("#game-area").append("<h1>Bust! The Dealer wins.</h1>");
+    gameOver();
+  } else if (eligiblePlayerScore === eligibleDealerScore) {
     $("#game-area").append("<h1>It's a draw!</h1>");
   } else if (
     eligibleDealerScore > eligiblePlayerScore &&
@@ -252,11 +255,11 @@ const gameOver = () => {
 
 //Buttons functionality
 
+//Check for bust
 $("#hit-button").click(function () {
   dealCard("player");
   if (playerScore[0] > 21 && playerScore[1] > 21) {
-    $("#game-area").append("<h1>Bust! The Dealer wins.</h1>");
-    gameOver();
+    checkForWinner();
   }
 });
 
