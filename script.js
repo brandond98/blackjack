@@ -57,6 +57,7 @@ const startGame = () => {
   $(".cards").empty();
   $("h1").remove();
 
+  //Scores as arrays so that we can store 2 scores in case of an ace card
   playerScore = [0, 0];
   dealerScore = [0, 0];
   deck = [];
