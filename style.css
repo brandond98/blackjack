@@ -7,24 +7,7 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-h1 {
-  text-align: center;
-  font-size: 24pt;
-  color: #fff;
-  margin: 0.5em 0 0;
-  font-weight: bold;
-}
-
-button {
-  background-color: #009900;
-  padding: 1.5em;
-  border: 1px solid #eee;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 11pt;
-  font-weight: bold;
-  width: 140px;
-}
+/* Dealers/Player area */
 
 #dealers-area {
   padding: 3em 0 1.5em 0;
@@ -56,6 +39,42 @@ button {
   font-size: 15pt;
 }
 
+.card {
+  width: 120px;
+  margin-left: 10px;
+}
+
+h4 {
+  color: #fff;
+  font-size: 17pt;
+  margin-left: 1em;
+}
+
+.score-container {
+  visibility: hidden;
+}
+
+/* Game area */
+
+h1 {
+  text-align: center;
+  font-size: 24pt;
+  color: #fff;
+  margin: 0.5em 0 0;
+  font-weight: bold;
+}
+
+button {
+  background-color: #009900;
+  padding: 1.5em;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 11pt;
+  font-weight: bold;
+  width: 140px;
+}
+
 #buttons div {
   flex: 1;
   align-items: center;
@@ -83,25 +102,6 @@ button {
   justify-content: center;
 }
 
-ul {
-  margin-right: 30pt;
-}
-
-.card {
-  width: 120px;
-  margin-left: 10px;
-}
-
 #game-area {
   padding: 1.5em 0;
-}
-
-h4 {
-  color: #fff;
-  font-size: 17pt;
-  margin-left: 1em;
-}
-
-.score-container {
-  visibility: hidden;
 }

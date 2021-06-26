@@ -46,7 +46,7 @@ const shuffleDeck = (deck) => {
   return deck;
 };
 
-//Start game
+//Start game - reset everything
 
 const startGame = () => {
   $("#start-game").css("display", "none");
@@ -67,13 +67,16 @@ const startGame = () => {
   shuffleDeck(deck);
   dealHands();
 
+  //Hide second dealers card and show back of card
+
   $("#dealers-area .cards :nth-child(2)").css("display", "none");
   $("#dealers-area .cards").append(
     '<img class="card back"src="img/red_back.png"></img>'
   );
   $(".score-container.player").css("visibility", "visible");
 
-  if (playerScore === 21) {
+  //Check if either player have a 'natural' and check for winner if they do
+  if (playerScore.includes(21) || dealerScore.includes(21)) {
     checkForWinner();
   }
 };
@@ -81,12 +84,14 @@ const startGame = () => {
 //Deal cards to player and computer
 
 const dealCard = (player) => {
+  //Get card details, first word of card, and image
   const card = deck[0];
   const cardValue = card.split(" ")[0];
   const cardImage = `<img class='card' src='img/${card}.png'></img>`;
   const playerScoreElement = ".players-score";
   const dealerScoreElement = ".dealers-score";
 
+  //Check if it is player or dealers turn and add score/change score text
   if (player === "player") {
     playersHand.push(card);
     $("#players-area .cards").append(cardImage);
@@ -112,10 +117,12 @@ const dealCard = (player) => {
       $(dealerScoreElement).text(`${dealerScore[0]} or ${dealerScore[1]}`);
     }
   }
+  //Play card deal sound and remove that card from deck
   dealCardSound.play();
   deck.shift();
 };
 
+//Deal 2 cards to the player and delaer to start thge game
 const dealHands = () => {
   for (let i = 0; i < 2; i++) {
     //Get card and it's value and add to hand/score
@@ -168,7 +175,7 @@ const dealersTurn = () => {
     checkForWinner();
     return;
   }
-
+  //Make sure that if either of the dealers score are 17 or over the dealers turn ends
   while (dealerScore[0] < 17 || dealerScore[1] < 17) {
     dealCard("dealer");
     if (dealerScore[0] >= 17 && dealerScore[0] <= 21) {
@@ -180,11 +187,10 @@ const dealersTurn = () => {
   checkForWinner();
 };
 
-//Hit/Stand funtionality - remove cards from deck/add up scores - ACE 11 or 1 functionality
-
 //Determine who won game
 
 const checkForWinner = () => {
+  //Get the score from user/dealer that can be used
   const eligibleDealerScoreArr = dealerScore
     .filter((score) => {
       return score <= 21;
@@ -204,6 +210,7 @@ const checkForWinner = () => {
   const eligiblePlayerScore = eligiblePlayerScoreArr[0];
   const eligibleDealerScore = eligibleDealerScoreArr[0];
 
+  //Change score text to eligible score
   if (!eligibleDealerScore) {
     $(".dealers-score").text(dealerScore[0]);
   } else {
@@ -230,7 +237,7 @@ const checkForWinner = () => {
   gameOver();
 };
 
-//Replay
+//Game over/Replay
 
 const gameOver = () => {
   $(".back").remove();
@@ -242,7 +249,7 @@ const gameOver = () => {
   $("#play-again").css("display", "inline");
 };
 
-//Button functionality
+//Buttons functionality
 
 $("#hit-button").click(function () {
   dealCard("player");
