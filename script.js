@@ -190,7 +190,7 @@ const dealersTurn = () => {
 //Determine who won game
 
 const checkForWinner = () => {
-  //Get the score from user/dealer that can be used
+  //Get the score from user/dealer that can be used - mainly for if an ace is in the hand
   const eligibleDealerScoreArr = dealerScore
     .filter((score) => {
       return score <= 21;
@@ -223,6 +223,7 @@ const checkForWinner = () => {
     $(".players-score").text(eligiblePlayerScore);
   }
 
+  //Add text to let the user know who won the game and end game
   if (eligiblePlayerScore === eligibleDealerScore) {
     $("#game-area").append("<h1>It's a draw!</h1>");
   } else if (
