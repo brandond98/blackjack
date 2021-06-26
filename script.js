@@ -211,7 +211,7 @@ const checkForWinner = () => {
   }
 
   if (!eligiblePlayerScore) {
-    $(".dealers-score").text(playerScore[0]);
+    $(".players-score").text(playerScore[0]);
   } else {
     $(".players-score").text(eligiblePlayerScore);
   }
